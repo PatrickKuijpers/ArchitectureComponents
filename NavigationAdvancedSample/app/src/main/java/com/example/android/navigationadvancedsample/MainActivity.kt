@@ -60,7 +60,8 @@ class MainActivity : AppCompatActivity() {
             navGraphIds = navGraphIds,
             fragmentManager = supportFragmentManager,
             containerId = R.id.nav_host_container,
-            intent = intent
+            intent = intent,
+            returnToTrueHomeFragment = true
         )
 
         // Whenever the selected controller changes, setup the action bar.
