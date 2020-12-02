@@ -21,6 +21,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.android.navigationadvancedsample.R
@@ -36,6 +37,10 @@ class Title : Fragment() {
 
         view.findViewById<Button>(R.id.about_btn).setOnClickListener {
             findNavController().navigate(R.id.action_title_to_about)
+        }
+        view.findViewById<Button>(R.id.my_profile).setOnClickListener {
+            val bundle = bundleOf("userName" to "My name")
+            findNavController().navigate(R.id.action_title_to_userProfile, bundle)
         }
         return view
     }
