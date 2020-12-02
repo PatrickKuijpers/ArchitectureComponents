@@ -52,8 +52,14 @@ class MainActivity : AppCompatActivity() {
      */
     private fun setupBottomNavigationBar() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
+        // Works the same as defining the menu in xml:
+        //  bottomNavigationView.inflateMenu(R.menu.bottom_nav)
 
-        val navGraphIds = listOf(R.navigation.home, R.navigation.list, R.navigation.form)
+        // Define the list of navGraphId for the controller:
+        //  val navGraphIds = listOf(R.navigation.home, R.navigation.list, R.navigation.form)
+
+        // But we like to add menu items programmatically instead:
+        val navGraphIds = bottomNavigationView.setupItems()
 
         // Setup the bottom navigation view with a list of navigation graphs
         val controller = bottomNavigationView.setupWithNavController(

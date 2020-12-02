@@ -43,6 +43,8 @@
     <string name="title_registered">Registered</string>
     <string name="title_list">Leaderboard</string>
     <string name="title_detail">Profile</string>
+    <string name="title_others">Others</string>
+    <string name="title_disabled">Disabled</string>
     <string name="cd_home">Home</string>
     <string name="cd_list">List</string>
     <string name="cd_form">Form</string>
