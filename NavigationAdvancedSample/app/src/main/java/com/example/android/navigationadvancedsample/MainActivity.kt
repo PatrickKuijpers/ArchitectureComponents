@@ -59,15 +59,18 @@ class MainActivity : AppCompatActivity() {
         //  val navGraphIds = listOf(R.navigation.home, R.navigation.list, R.navigation.form)
 
         // But we like to add menu items programmatically instead:
-        val navGraphIds = bottomNavigationView.setupItems()
+        val items = BottomNavItem.values()
 
         // Setup the bottom navigation view with a list of navigation graphs
         val controller = bottomNavigationView.setupWithNavController(
-            navGraphIds = navGraphIds,
+            navGraphIds = items.getNavGraphIdsForBottomNavView(),
             fragmentManager = supportFragmentManager,
             containerId = R.id.nav_host_container,
             intent = intent
-        )
+        ) { position: Int, navGraphId: Int, graphId: Int ->
+            val item = items.first { it.navGraphLayoutId == navGraphId }
+            bottomNavigationView.addBottomNavigationItem(item, position, graphId)
+        }
 
         // Whenever the selected controller changes, setup the action bar.
         controller.observe(this, Observer { navController ->

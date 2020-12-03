@@ -36,7 +36,8 @@ fun BottomNavigationView.setupWithNavController(
     navGraphIds: List<Int>,
     fragmentManager: FragmentManager,
     containerId: Int,
-    intent: Intent
+    intent: Intent,
+    onAddItem: (position: Int, navGraphId: Int, graphId: Int) -> Unit
 ): LiveData<NavController> {
 
     // Map of tags
@@ -64,6 +65,9 @@ fun BottomNavigationView.setupWithNavController(
         if (index == 0) {
             firstFragmentGraphId = graphId
         }
+
+        // Optionally add the item programmatically instead of via a menu.xml
+        onAddItem(index, navGraphId, graphId)
 
         // Save to the map
         graphIdToTagMap[graphId] = fragmentTag
@@ -172,7 +176,7 @@ private fun BottomNavigationView.setupDeepLinks(
         )
         // Handle Intent
         if (navHostFragment.navController.handleDeepLink(intent)
-                && selectedItemId != navHostFragment.navController.graph.id) {
+            && selectedItemId != navHostFragment.navController.graph.id) {
             this.selectedItemId = navHostFragment.navController.graph.id
         }
     }
