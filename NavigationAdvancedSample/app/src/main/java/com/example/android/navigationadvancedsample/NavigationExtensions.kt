@@ -18,6 +18,10 @@ package com.example.android.navigationadvancedsample
 
 import android.content.Intent
 import android.util.SparseArray
+import android.view.Menu
+import androidx.annotation.DrawableRes
+import androidx.annotation.IdRes
+import androidx.annotation.StringRes
 import androidx.core.util.forEach
 import androidx.core.util.set
 import androidx.fragment.app.FragmentManager
@@ -27,8 +31,14 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
+data class BottomNavItem(
+    @IdRes val navGraphLayoutId: Int,
+    @StringRes val titleRes: Int,
+    @DrawableRes val iconRes: Int
+)
+
 /**
- * Manages the various graphs needed for a [BottomNavigationView].
+ * Manages the various items/tabs needed for a [BottomNavigationView].
  *
  * This sample is a workaround until the Navigation Component supports multiple back stacks.
  *
@@ -37,11 +47,31 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
  *                                  false will return to the latest fragment saved on the backstack of the first tab's navGraph
  */
 fun BottomNavigationView.setupWithNavController(
-    navGraphIds: List<Int>,
+    items: List<BottomNavItem>,
     fragmentManager: FragmentManager,
     containerId: Int,
     intent: Intent,
     returnToTrueHomeFragment: Boolean = false
+): LiveData<NavController> {
+    val navGraphLayoutIds = items.map { it.navGraphLayoutId }
+    return setupWithNavController(navGraphLayoutIds, fragmentManager, containerId, intent, returnToTrueHomeFragment) { position: Int, navGraphLayoutId: Int, graphId: Int ->
+        val item = items.first { it.navGraphLayoutId == navGraphLayoutId }
+        menu.add(Menu.NONE, graphId, position, item.titleRes).setIcon(item.iconRes)
+    }
+}
+
+/**
+ * Manages the various graphs needed for a [BottomNavigationView].
+ *
+ * This sample is a workaround until the Navigation Component supports multiple back stacks.
+ */
+fun BottomNavigationView.setupWithNavController(
+    navGraphLayoutIds: List<Int>,
+    fragmentManager: FragmentManager,
+    containerId: Int,
+    intent: Intent,
+    returnToTrueHomeFragment: Boolean = false,
+    onAddItem: (position: Int, navGraphLayoutId: Int, graphId: Int) -> Unit = { _: Int, _: Int, _: Int -> }
 ): LiveData<NavController> {
 
     // Map of tags
@@ -52,14 +82,14 @@ fun BottomNavigationView.setupWithNavController(
     var firstFragmentGraphId = 0
 
     // First create a NavHostFragment for each NavGraph ID
-    navGraphIds.forEachIndexed { index, navGraphId ->
+    navGraphLayoutIds.forEachIndexed { index, navGraphLayoutId ->
         val fragmentTag = getFragmentTag(index)
 
         // Find or create the Navigation host fragment
         val navHostFragment = obtainNavHostFragment(
             fragmentManager,
             fragmentTag,
-            navGraphId,
+            navGraphLayoutId,
             containerId
         )
 
@@ -69,6 +99,9 @@ fun BottomNavigationView.setupWithNavController(
         if (index == 0) {
             firstFragmentGraphId = graphId
         }
+
+        // Optionally add the item programmatically instead of via a menu.xml
+        onAddItem(index, navGraphLayoutId, graphId)
 
         // Save to the map
         graphIdToTagMap[graphId] = fragmentTag
@@ -140,7 +173,7 @@ fun BottomNavigationView.setupWithNavController(
     setupItemReselected(graphIdToTagMap, fragmentManager)
 
     // Handle deep link
-    setupDeepLinks(navGraphIds, fragmentManager, containerId, intent)
+    setupDeepLinks(navGraphLayoutIds, fragmentManager, containerId, intent)
 
     // Finally, ensure that we update our BottomNavigationView when the back stack changes
     fragmentManager.addOnBackStackChangedListener {
@@ -166,19 +199,19 @@ fun BottomNavigationView.setupWithNavController(
 }
 
 private fun BottomNavigationView.setupDeepLinks(
-    navGraphIds: List<Int>,
+    navGraphLayoutIds: List<Int>,
     fragmentManager: FragmentManager,
     containerId: Int,
     intent: Intent
 ) {
-    navGraphIds.forEachIndexed { index, navGraphId ->
+    navGraphLayoutIds.forEachIndexed { index, navGraphLayoutId ->
         val fragmentTag = getFragmentTag(index)
 
         // Find or create the Navigation host fragment
         val navHostFragment = obtainNavHostFragment(
             fragmentManager,
             fragmentTag,
-            navGraphId,
+            navGraphLayoutId,
             containerId
         )
         // Handle Intent
