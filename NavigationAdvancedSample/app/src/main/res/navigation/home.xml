@@ -22,6 +22,8 @@
     android:id="@+id/home"
     app:startDestination="@+id/titleScreen">
 
+    <include app:graph="@navigation/person" />
+
     <fragment
         android:id="@+id/titleScreen"
         android:name="com.example.android.navigationadvancedsample.homescreen.Title"
@@ -30,6 +32,9 @@
         <action
             android:id="@+id/action_title_to_about"
             app:destination="@id/aboutScreen"/>
+        <action
+            android:id="@+id/action_title_to_userProfile"
+            app:destination="@id/person"/>
     </fragment>
     <fragment
         android:id="@+id/aboutScreen"

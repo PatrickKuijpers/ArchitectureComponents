@@ -22,6 +22,8 @@
     android:id="@+id/form"
     app:startDestination="@id/register">
 
+    <include app:graph="@navigation/person" />
+
     <fragment
             android:id="@+id/register"
             android:name="com.example.android.navigationadvancedsample.formscreen.Register"
@@ -35,5 +37,12 @@
         android:id="@+id/registered"
         android:name="com.example.android.navigationadvancedsample.formscreen.Registered"
         android:label="Registered"
-        tools:layout="@layout/fragment_registered"/>
+        tools:layout="@layout/fragment_registered">
+        <action
+            android:id="@+id/action_registered_to_userProfile"
+            app:destination="@id/person" />
+        <argument
+            android:name="userName"
+            app:argType="string" />
+    </fragment>
 </navigation>

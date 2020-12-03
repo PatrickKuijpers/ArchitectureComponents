@@ -20,7 +20,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.android.navigationadvancedsample.R
 
 /**
@@ -31,6 +34,12 @@ class Registered : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_registered, container, false)
+        val view = inflater.inflate(R.layout.fragment_registered, container, false)
+        view.findViewById<TextView>(R.id.done).text = arguments!!.getString("userName") + " registered"
+        view.findViewById<TextView>(R.id.done).setOnClickListener {
+            val bundle = bundleOf("userName" to arguments!!.getString("userName"))
+            findNavController().navigate(R.id.action_registered_to_userProfile, bundle)
+        }
+        return view
     }
 }

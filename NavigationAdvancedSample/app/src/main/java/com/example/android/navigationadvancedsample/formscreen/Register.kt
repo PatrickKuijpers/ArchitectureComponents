@@ -21,6 +21,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.android.navigationadvancedsample.R
@@ -37,7 +39,15 @@ class Register : Fragment() {
         val view = inflater.inflate(R.layout.fragment_register, container, false)
 
         view.findViewById<Button>(R.id.signup_btn).setOnClickListener {
-            findNavController().navigate(R.id.action_register_to_registered)
+            val userName = view.findViewById<TextView>(R.id.username_text).text.toString().run {
+                if (isBlank()) {
+                    "SomeUser"
+                } else {
+                    this
+                }
+            }
+            val bundle = bundleOf("userName" to userName)
+            findNavController().navigate(R.id.action_register_to_registered, bundle)
         }
         return view
     }
