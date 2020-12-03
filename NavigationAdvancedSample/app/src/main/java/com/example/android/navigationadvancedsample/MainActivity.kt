@@ -63,14 +63,11 @@ class MainActivity : AppCompatActivity() {
 
         // Setup the bottom navigation view with a list of navigation graphs
         val controller = bottomNavigationView.setupWithNavController(
-            navGraphIds = items.getNavGraphIdsForBottomNavView(),
+            items = items.filterForBottomNavView(),
             fragmentManager = supportFragmentManager,
             containerId = R.id.nav_host_container,
             intent = intent
-        ) { position: Int, navGraphId: Int, graphId: Int ->
-            val item = items.first { it.navGraphLayoutId == navGraphId }
-            bottomNavigationView.addBottomNavigationItem(item, position, graphId)
-        }
+        )
 
         // Whenever the selected controller changes, setup the action bar.
         controller.observe(this, Observer { navController ->
