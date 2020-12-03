@@ -3,33 +3,34 @@ package com.example.android.navigationadvancedsample
 import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
-import com.example.android.navigationadvancedsample.BottomNavItem.Others
+import com.example.android.navigationadvancedsample.Feature.Others
 
 const val MAX_ITEMS_BOTTOM_NAV_BAR = 5
 
-fun Array<BottomNavItem>.filterForBottomNavView(): List<IBottomNavItem> {
-    val bottomNavItems = mutableListOf<IBottomNavItem>()
-    var position = 1 // TODO: make position configurable
-    forEach {
-        if (position < MAX_ITEMS_BOTTOM_NAV_BAR && it != Others && it.isFeatureEnabled) {
-            bottomNavItems.add(it)
-            position++
+fun Array<Feature>.filterForBottomNavView(): List<BottomNavItem> {
+    val bottomNavItems = mutableListOf<BottomNavItem>()
+    forEachIndexed { index, feature ->
+        val position = index - 1
+        if (position < MAX_ITEMS_BOTTOM_NAV_BAR && feature != Others && feature.isFeatureEnabled) {
+            bottomNavItems.add(feature.toBottomNavItem())
         }
     }
     // TODO: add an overflow item (maybe we can use menu.addSubMenu?)
-//    bottomNavItems.add(Others.navGraphLayoutId)
+    // bottomNavItems.add(Others.toBottomNavItem())
     return bottomNavItems
 }
 
-enum class BottomNavItem(
-    @StringRes override val titleRes: Int,
-    @DrawableRes override val iconRes: Int,
-    @IdRes override val navGraphLayoutId: Int,
+enum class Feature(
+    @IdRes val navGraphLayoutId: Int,
+    @StringRes val titleRes: Int,
+    @DrawableRes val iconRes: Int,
     val isFeatureEnabled: Boolean = true
-) : IBottomNavItem { // The order of enums is the default order in which they are shown (when the  order isn't configured), apart from hidden items etc.
-    Home(R.string.title_home, R.drawable.ic_home, R.navigation.home),
-    List(R.string.title_list, R.drawable.ic_list, R.navigation.list),
-    Form(R.string.title_register, R.drawable.ic_feedback, R.navigation.form),
-    Disabled(R.string.title_disabled, R.drawable.ic_home, R.navigation.home, false), // testing a disabled item (should not be added to the bottomNavBar)
-    Others(R.string.title_others, R.drawable.ic_list, R.navigation.list); // TODO: create an overflow item
+) { // The order of enums is the default order in which they are shown (when the  order isn't configured), apart from hidden items etc.
+    Home(R.navigation.home, R.string.title_home, R.drawable.ic_home),
+    List(R.navigation.list, R.string.title_list, R.drawable.ic_list),
+    Form(R.navigation.form, R.string.title_register, R.drawable.ic_feedback),
+    Disabled(R.navigation.home, R.string.title_disabled, R.drawable.ic_home, false), // testing a disabled item (should not be added to the bottomNavBar)
+    Others(R.navigation.list, R.string.title_others, R.drawable.ic_list); // TODO: create an overflow item
+
+    fun toBottomNavItem() = BottomNavItem(navGraphLayoutId, titleRes, iconRes)
 }

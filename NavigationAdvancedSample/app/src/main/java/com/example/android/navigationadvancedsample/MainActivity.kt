@@ -59,11 +59,11 @@ class MainActivity : AppCompatActivity() {
         //  val navGraphIds = listOf(R.navigation.home, R.navigation.list, R.navigation.form)
 
         // But we like to add menu items programmatically instead:
-        val items = BottomNavItem.values()
+        val features = Feature.values()
 
         // Setup the bottom navigation view with a list of navigation graphs
         val controller = bottomNavigationView.setupWithNavController(
-            items = items.filterForBottomNavView(),
+            items = features.filterForBottomNavView(),
             fragmentManager = supportFragmentManager,
             containerId = R.id.nav_host_container,
             intent = intent

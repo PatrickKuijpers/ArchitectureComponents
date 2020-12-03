@@ -19,6 +19,9 @@ package com.example.android.navigationadvancedsample
 import android.content.Intent
 import android.util.SparseArray
 import android.view.Menu
+import androidx.annotation.DrawableRes
+import androidx.annotation.IdRes
+import androidx.annotation.StringRes
 import androidx.core.util.forEach
 import androidx.core.util.set
 import androidx.fragment.app.FragmentManager
@@ -28,11 +31,11 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-interface IBottomNavItem {
-    val titleRes: Int
-    val iconRes: Int
-    val navGraphLayoutId: Int
-}
+data class BottomNavItem(
+    @IdRes val navGraphLayoutId: Int,
+    @StringRes val titleRes: Int,
+    @DrawableRes val iconRes: Int
+)
 
 /**
  * Manages the various items/tabs needed for a [BottomNavigationView].
@@ -40,7 +43,7 @@ interface IBottomNavItem {
  * This sample is a workaround until the Navigation Component supports multiple back stacks.
  */
 fun BottomNavigationView.setupWithNavController(
-    items: List<IBottomNavItem>,
+    items: List<BottomNavItem>,
     fragmentManager: FragmentManager,
     containerId: Int,
     intent: Intent
