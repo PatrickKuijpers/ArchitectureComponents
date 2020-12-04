@@ -29,6 +29,7 @@ enum class Feature(
     Home(R.navigation.home, R.string.title_home, R.drawable.ic_home),
     List(R.navigation.list, R.string.title_list, R.drawable.ic_list),
     Form(R.navigation.form, R.string.title_register, R.drawable.ic_feedback),
+    DynamicModule(R.navigation.dynamiclist, R.string.title_dynamicfeature1, R.drawable.ic_list),
     Disabled(R.navigation.home, R.string.title_disabled, R.drawable.ic_home, false), // testing a disabled item (should not be added to the bottomNavBar)
     Others(R.navigation.list, R.string.title_others, R.drawable.ic_list); // TODO: create an overflow item
 

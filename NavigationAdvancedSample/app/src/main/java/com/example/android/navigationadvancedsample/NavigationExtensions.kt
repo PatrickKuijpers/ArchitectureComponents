@@ -29,7 +29,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import androidx.navigation.dynamicfeatures.fragment.DynamicNavHostFragment
-import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 data class BottomNavItem(
@@ -236,7 +235,7 @@ private fun BottomNavigationView.setupItemReselected(
 
 /** Pop the back stack to the start destination of the navController graph from the supplied fragmentTag */
 private fun FragmentManager.popToStartDestinationOf(fragmentTag: String) {
-    val selectedFragment = findFragmentByTag(fragmentTag) as NavHostFragment
+    val selectedFragment = findFragmentByTag(fragmentTag) as DynamicNavHostFragment
     val navController = selectedFragment.navController
     navController.popBackStack(
         navController.graph.startDestination, false
