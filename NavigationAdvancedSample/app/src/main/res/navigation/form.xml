@@ -22,7 +22,11 @@
     android:id="@+id/form"
     app:startDestination="@id/register">
 
-    <include app:graph="@navigation/person" />
+    <include-dynamic
+        android:id="@id/person_detail"
+        app:graphPackage="com.example.android.navigationadvancedsample.PersonFeature"
+        app:graphResName="person_detail"
+        app:moduleName="PersonFeature" />
 
     <fragment
             android:id="@+id/register"
@@ -40,7 +44,7 @@
         tools:layout="@layout/fragment_registered">
         <action
             android:id="@+id/action_registered_to_userProfile"
-            app:destination="@id/person" />
+            app:destination="@id/person_detail" />
         <argument
             android:name="userName"
             app:argType="string" />

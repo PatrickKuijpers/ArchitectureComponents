@@ -34,7 +34,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <!-- This is added to handle a deep link -->
-            <nav-graph android:value="@navigation/person" />
+            <!--TODO: how do we get this working in dynamic feature modules?
+                 <nav-graph android:value="@navigation/person_detail" />-->
         </activity>
     </application>
 
