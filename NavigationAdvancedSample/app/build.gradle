@@ -42,7 +42,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    dynamicFeatures = [':dynamicfeature1']
+    dynamicFeatures = [
+            ":features:dynamicfeature1",
+            ":features:PersonFeature"]
 }
 
 dependencies {
