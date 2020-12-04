@@ -16,11 +16,11 @@
 
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/person"
+    android:id="@+id/list_graph"
     app:startDestination="@id/list">
 
     <include-dynamic
-        android:id="@+id/list"
+        android:id="@id/list"
         app:graphPackage="com.example.android.navigationadvancedsample.PersonFeature"
         app:graphResName="list"
         app:moduleName="PersonFeature"/>
