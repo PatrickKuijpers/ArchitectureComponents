@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_feature_next_to_person_list"
             app:destination="@id/list"/>
+        <action
+            android:id="@+id/action_feature_next_to_person_detail"
+            app:destination="@id/person_detail" />
 
     </fragment>
 
@@ -48,5 +51,16 @@
         app:graphPackage="com.example.android.navigationadvancedsample.PersonFeature"
         app:graphResName="list"
         app:moduleName="PersonFeature"/>
+
+    <include-dynamic
+        android:id="@id/person_detail"
+        app:graphPackage="com.example.android.navigationadvancedsample.PersonFeature"
+        app:graphResName="person_detail"
+        app:moduleName="PersonFeature">
+
+        <argument
+            android:name="userName"
+            app:argType="string" />
+    </include-dynamic>
 
 </navigation>

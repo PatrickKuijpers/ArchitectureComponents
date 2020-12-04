@@ -19,6 +19,10 @@ class FeatureNextFragment : Fragment() {
             it.findViewById<Button>(R.id.person_list_button).setOnClickListener {
                 findNavController().navigate(R.id.action_feature_next_to_person_list)
             }
+            it.findViewById<Button>(R.id.person_detail_button).setOnClickListener {
+                val bundle = bundleOf("userName" to "Person 1")
+                findNavController().navigate(R.id.action_feature_next_to_person_detail, bundle)
+            }
         }
     }
 }

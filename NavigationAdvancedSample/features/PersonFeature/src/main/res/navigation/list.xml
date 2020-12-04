@@ -23,7 +23,7 @@
     app:moduleName="PersonFeature"
     app:startDestination="@+id/leaderboard">
 
-    <include app:graph="@navigation/person" />
+    <include app:graph="@navigation/person_detail" />
 
     <fragment
             android:id="@+id/leaderboard"
@@ -32,6 +32,6 @@
             tools:layout="@layout/fragment_leaderboard">
         <action
             android:id="@+id/action_leaderboard_to_userProfile"
-            app:destination="@id/person"/>
+            app:destination="@id/person_detail"/>
     </fragment>
 </navigation>
