@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/person_detail_graph"
+    app:startDestination="@id/person_detail">
+
+    <include-dynamic
+        android:id="@id/person_detail"
+        app:graphPackage="com.example.android.navigationadvancedsample.PersonFeature"
+        app:graphResName="person_detail"
+        app:moduleName="PersonFeature" />
+
+</navigation>
