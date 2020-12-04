@@ -28,6 +28,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
+import androidx.navigation.dynamicfeatures.fragment.DynamicNavHostFragment
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -133,7 +134,7 @@ fun BottomNavigationView.setupWithNavController(
                 fragmentManager.popBackStack(firstFragmentTag,
                     FragmentManager.POP_BACK_STACK_INCLUSIVE)
                 val selectedFragment = fragmentManager.findFragmentByTag(newlySelectedItemTag)
-                    as NavHostFragment
+                    as DynamicNavHostFragment
 
                 // Exclude the first fragment tag because it's always in the back stack.
                 if (firstFragmentTag != newlySelectedItemTag) {
@@ -244,7 +245,7 @@ private fun FragmentManager.popToStartDestinationOf(fragmentTag: String) {
 
 private fun detachNavHostFragment(
     fragmentManager: FragmentManager,
-    navHostFragment: NavHostFragment
+    navHostFragment: DynamicNavHostFragment
 ) {
     fragmentManager.beginTransaction()
         .detach(navHostFragment)
@@ -253,7 +254,7 @@ private fun detachNavHostFragment(
 
 private fun attachNavHostFragment(
     fragmentManager: FragmentManager,
-    navHostFragment: NavHostFragment,
+    navHostFragment: DynamicNavHostFragment,
     isPrimaryNavFragment: Boolean
 ) {
     fragmentManager.beginTransaction()
@@ -272,13 +273,13 @@ private fun obtainNavHostFragment(
     fragmentTag: String,
     navGraphId: Int,
     containerId: Int
-): NavHostFragment {
+): DynamicNavHostFragment {
     // If the Nav Host fragment exists, return it
-    val existingFragment = fragmentManager.findFragmentByTag(fragmentTag) as NavHostFragment?
+    val existingFragment = fragmentManager.findFragmentByTag(fragmentTag) as DynamicNavHostFragment?
     existingFragment?.let { return it }
 
     // Otherwise, create it and return it.
-    val navHostFragment = NavHostFragment.create(navGraphId)
+    val navHostFragment = BaseDynamicNavHostFragment.createDynamicNavHostFragment(navGraphId)
     fragmentManager.beginTransaction()
         .add(containerId, navHostFragment, fragmentTag)
         .commitNow()

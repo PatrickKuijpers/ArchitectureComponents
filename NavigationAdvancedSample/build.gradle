@@ -18,6 +18,9 @@
 
 buildscript {
     apply from: 'versions.gradle'
+    ext {
+        versions.kotlin = '1.4.20'
+    }
     addRepos(repositories)
     dependencies {
         classpath deps.android_gradle_plugin
