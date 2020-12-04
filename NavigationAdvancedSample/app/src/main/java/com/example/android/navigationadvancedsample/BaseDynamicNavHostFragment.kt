@@ -5,19 +5,15 @@ import androidx.annotation.NavigationRes
 import androidx.navigation.dynamicfeatures.fragment.DynamicNavHostFragment
 
 /**
- * [DynamicNavHostFragment] creator class which
- * uses [BaseDynamicNavHostFragment.createDynamicNavHostFragment] function with navigation graph
- * parameter
+ * [DynamicNavHostFragment] creator class which uses [BaseDynamicNavHostFragment.createDynamicNavHostFragment] function with navigation graph
+ * parameter.
+ * Borrowed from: https://stackoverflow.com/questions/62796133/how-to-use-dynamic-feature-module-with-bottomnavigationview
  */
-
 class BaseDynamicNavHostFragment : DynamicNavHostFragment() {
-
 
     companion object {
         private const val KEY_GRAPH_ID = "android-support-nav:fragment:graphId"
-        private const val KEY_START_DESTINATION_ARGS =
-                "android-support-nav:fragment:startDestinationArgs"
-
+        private const val KEY_START_DESTINATION_ARGS = "android-support-nav:fragment:startDestinationArgs"
 
         /**
          * Create a new NavHostFragment instance with an inflated [NavGraph] resource.
@@ -26,11 +22,10 @@ class BaseDynamicNavHostFragment : DynamicNavHostFragment() {
          * @param startDestinationArgs arguments to send to the start destination of the graph
          * @return a new NavHostFragment instance
          */
-
         @JvmStatic
         fun createDynamicNavHostFragment(
-                @NavigationRes graphResId: Int,
-                startDestinationArgs: Bundle? = null
+            @NavigationRes graphResId: Int,
+            startDestinationArgs: Bundle? = null
         ): BaseDynamicNavHostFragment {
 
             if (graphResId == 0) throw Exception("Navigation graph id cannot be 0")
