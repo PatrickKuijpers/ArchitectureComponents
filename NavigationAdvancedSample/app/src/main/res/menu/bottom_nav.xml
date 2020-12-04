@@ -36,5 +36,5 @@
         android:id="@+id/dynamiclist"
         android:icon="@drawable/ic_list"
         android:contentDescription="@string/cd_form"
-        android:title="@string/title_dfm_list" />
+        android:title="@string/cd_list" />
 </menu>
