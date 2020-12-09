@@ -1,37 +1,16 @@
-Android Architecture Components Advanced Navigation Sample
+Android Architecture Components - even more - Advanced Navigation Sample
 ==============================================
 
-### Features
+This project is based on [Android's NavigationAdvancedSample of the architecture-components-samples](https://github.com/android/architecture-components-samples/tree/main/NavigationAdvancedSample).
+It is meant as a POC for a more complex navigation stack we'll be using in our (private) main project.
 
-This sample showcases the behavior of a bottom navigation view following the [Principles of
-Navigation](https://developer.android.com/topic/libraries/architecture/navigation#fixed).
+We're also adding some additional project complexity with which the bottom navigation should co-operate with.
 
- * Fixed start destination
- * Navigation state should be represented via a stack of destinations
- * The Up button never exits your app
- * Up and Back are identical within your app's task
- * Deep linking and navigating to a destination should yield the same stack
-
-Check out the
-[UI tests](https://github.com/googlesamples/android-architecture-components/tree/master/NavigationAdvancedSample/app/src/androidTest/java/com/example/android/navigationadvancedsample)
-to learn about specific scenarios.
-
-License
--------
-
-Copyright 2018 The Android Open Source Project, Inc.
-
-Licensed to the Apache Software Foundation (ASF) under one or more contributor
-license agreements.  See the NOTICE file distributed with this work for
-additional information regarding copyright ownership.  The ASF licenses this
-file to you under the Apache License, Version 2.0 (the "License"); you may not
-use this file except in compliance with the License.  You may obtain a copy of
-the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
-License for the specific language governing permissions and limitations under
-the License.
+### Additional Features
+1) The navigation is 'even more complex' compared to the original:
+    - A shared nav_graph at the end of each bottom-nav feature's backstack (included in the main nav_graphs)
+    - A variable set of BottomNavItems (we want to enable our user to modify the order of these in the end, so cannot use the usual `menu.xml` for our BottomNavItems).
+    - Minor tweaks to `NavigationExtensions` for a different back experience
+2) The project is split in several modules (these should eventually be dynamic feature modules)
+TODO:
+3) Dagger implementation
