@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Included dynamic graph ids -->
+    <item name="person_detail" type="id" />
+    <item name="list" type="id" />
+</resources>

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.navigationadvancedsample.listscreen
+package com.example.android.navigationadvancedsample.PersonFeature.listscreen
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,8 +22,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.android.navigationadvancedsample.R
-import com.example.android.navigationadvancedsample.listscreen.MyAdapter.Companion.USERNAME_KEY
+import com.example.android.navigationadvancedsample.PersonFeature.R
+import com.example.android.navigationadvancedsample.PersonFeature.listscreen.MyAdapter.Companion.USERNAME_KEY
 
 
 /**

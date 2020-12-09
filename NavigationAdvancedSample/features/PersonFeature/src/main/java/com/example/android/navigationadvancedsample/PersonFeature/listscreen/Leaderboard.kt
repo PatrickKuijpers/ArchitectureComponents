@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.navigationadvancedsample.listscreen
+package com.example.android.navigationadvancedsample.PersonFeature.listscreen
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -26,7 +26,8 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.android.navigationadvancedsample.R
+import com.example.android.navigationadvancedsample.PersonFeature.R
+
 
 /**
  * Shows a static leaderboard with multiple users.
@@ -55,7 +56,7 @@ class Leaderboard : Fragment() {
 }
 
 class MyAdapter(private val myDataset: Array<String>) :
-    RecyclerView.Adapter<MyAdapter.ViewHolder>() {
+        RecyclerView.Adapter<MyAdapter.ViewHolder>() {
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -69,7 +70,7 @@ class MyAdapter(private val myDataset: Array<String>) :
                                     viewType: Int): ViewHolder {
         // create a new view
         val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.list_view_item, parent, false)
+                .inflate(R.layout.list_view_item, parent, false)
 
 
         return ViewHolder(itemView)
@@ -89,7 +90,7 @@ class MyAdapter(private val myDataset: Array<String>) :
 
             holder.item.findNavController().navigate(
                     R.id.action_leaderboard_to_userProfile,
-                bundle)
+                    bundle)
         }
     }
 
@@ -102,10 +103,10 @@ class MyAdapter(private val myDataset: Array<String>) :
 }
 
 private val listOfAvatars = listOf(
-    R.drawable.avatar_1_raster,
-    R.drawable.avatar_2_raster,
-    R.drawable.avatar_3_raster,
-    R.drawable.avatar_4_raster,
-    R.drawable.avatar_5_raster,
-    R.drawable.avatar_6_raster
+        com.example.android.navigationadvancedsample.R.drawable.avatar_1_raster,
+        com.example.android.navigationadvancedsample.R.drawable.avatar_2_raster,
+        com.example.android.navigationadvancedsample.R.drawable.avatar_3_raster,
+        com.example.android.navigationadvancedsample.R.drawable.avatar_4_raster,
+        com.example.android.navigationadvancedsample.R.drawable.avatar_5_raster,
+        com.example.android.navigationadvancedsample.R.drawable.avatar_6_raster
 )
